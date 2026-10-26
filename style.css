@@ -139,3 +139,9 @@ dialog{margin:auto}
 .stat b{display:block;font:700 2.4rem Sora,sans-serif;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .stat span{display:block;margin-top:8px;color:var(--muted);font-size:.92rem}
 @media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* Statut du formulaire */
+.fstatus{font-size:.92rem;font-weight:600;min-height:1.4em;margin:0}
+.fstatus.ok{color:#16a34a}
+.fstatus.err{color:#dc2626}
+#form .btn:disabled{opacity:.7;cursor:progress}

@@ -24,7 +24,7 @@ h_proj:"Projets académiques",
 b_detail:"Voir détail",b_pdf:"Rapport PDF",b_gh:"GitHub",key_t:"Points clés",close:"Fermer",
 h_skills:"Compétences",h_lang:"Langues",s1:"Langages",s2:"Backend & frameworks",s3:"Développement web",s4:"Architecture & DevOps",s5:"Bases de données",s6:"IA & agents autonomes",s7:"Data & Machine Learning",s8:"Mobile & outils",l1:"Français",l1v:"Courant",l2:"Anglais",l2v:"Intermédiaire",l3:"Arabe",l3v:"Langue maternelle",s10:"Compétences personnelles",s10v:"Travail en équipe, Résolution de problèmes, Autonomie, Adaptabilité, Apprentissage continu",
 h_contact:"Contact",c_intro:"Une opportunité de stage ou un projet ? Écrivez-moi.",c_mail:"E-mail",c_phone:"Téléphone",c_loc:"Localisation",c_loc_v:"Salé, Maroc",
-f_name:"Votre nom",f_mail:"Votre e-mail",f_msg:"Votre message",f_send:"Envoyer le message",
+f_name:"Votre nom",f_mail:"Votre e-mail",f_msg:"Votre message",f_send:"Envoyer le message",f_sending:"Envoi en cours…",f_ok:"Merci ! Votre message a bien été envoyé.",f_err:"Une erreur est survenue. Veuillez réessayer ou m’écrire directement par e-mail.",
 footer:"© 2026 Hiba Rezguani. Tous droits réservés.",theme_l:"Mode clair",theme_d:"Mode sombre"},
 en:{nav_about:"About",nav_edu:"Education",nav_exp:"Experience",nav_proj:"Projects",nav_skills:"Skills",nav_lang:"Languages",nav_contact:"Contact",
 avail:"Available for an End of Study Internship from January 2027",
@@ -51,7 +51,7 @@ h_proj:"Academic projects",
 b_detail:"View details",b_pdf:"PDF report",b_gh:"GitHub",key_t:"Key points",close:"Close",
 h_skills:"Skills",h_lang:"Languages",s1:"Programming languages",s2:"Backend & frameworks",s3:"Web development",s4:"Architecture & DevOps",s5:"Databases",s6:"AI & autonomous agents",s7:"Data & Machine Learning",s8:"Mobile & tools",l1:"French",l1v:"Fluent",l2:"English",l2v:"Intermediate",l3:"Arabic",l3v:"Native",s10:"Soft skills",s10v:"Teamwork, Problem-solving, Autonomy, Adaptability, Continuous Learning",
 h_contact:"Contact",c_intro:"An internship opportunity or a project? Get in touch.",c_mail:"Email",c_phone:"Phone",c_loc:"Location",c_loc_v:"Salé, Morocco",
-f_name:"Your name",f_mail:"Your email",f_msg:"Your message",f_send:"Send message",
+f_name:"Your name",f_mail:"Your email",f_msg:"Your message",f_send:"Send message",f_sending:"Sending…",f_ok:"Thank you! Your message has been sent.",f_err:"Something went wrong. Please try again or email me directly.",
 footer:"© 2026 Hiba Rezguani. All rights reserved.",theme_l:"Light mode",theme_d:"Dark mode"}};
 
 const SK = {
@@ -89,6 +89,18 @@ function setTheme(t){root.dataset.theme=t;localStorage.setItem("theme",t);$("#th
 root.dataset.theme="light";
 $("#lang").onclick=()=>setLang(L()==="fr"?"en":"fr");
 $("#theme").onclick=()=>setTheme(root.dataset.theme==="dark"?"light":"dark");
-$("#form").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);
- location.href=`mailto:hibarezguani012@gmail.com?subject=${encodeURIComponent("Portfolio : "+f.get("name"))}&body=${encodeURIComponent(f.get("message")+"\n\n"+f.get("email"))}`};
+$("#form").onsubmit=async e=>{e.preventDefault();
+ const form=e.target,btn=form.querySelector("button[type=submit]"),st=$("#fstatus"),l=L();
+ const fd=new FormData(form);
+ fd.append("access_key","3251f4e6-58c0-457c-a09e-2270e84eb8c1");
+ fd.append("subject","Portfolio : "+fd.get("name"));
+ fd.append("from_name","Portfolio Hiba Rezguani");
+ btn.disabled=true;btn.textContent=T[l].f_sending;st.className="fstatus";st.textContent="";
+ try{
+  const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:fd});
+  const d=await r.json();
+  if(r.ok&&d.success){st.textContent=T[L()].f_ok;st.classList.add("ok");form.reset()}
+  else{st.textContent=T[L()].f_err;st.classList.add("err")}
+ }catch(err){st.textContent=T[L()].f_err;st.classList.add("err")}
+ finally{btn.disabled=false;btn.textContent=T[L()].f_send}};
 setLang("fr");
