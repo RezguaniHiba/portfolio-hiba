@@ -3,7 +3,7 @@ fr:{nav_about:"À propos",nav_edu:"Formation",nav_exp:"Expérience",nav_proj:"Pr
 avail:"Disponible pour un stage de fin d’études à partir de janvier 2027",
 role:"Élève ingénieure en Génie Logiciel à l’ENSIAS",
 lead:"Passionnée par le génie logiciel, le développement Full-Stack et Backend, les architectures microservices et les systèmes multi-agents. Je transforme les idées en applications concrètes, de la conception à la réalisation.",
-cta_proj:"Voir mes projets",cta_cv:"Télécharger mon CV",cta_contact:"Me contacter",
+cta_proj:"Voir mes projets",cta_cv:"Télécharger mon CV",cta_contact:"Me contacter",st1:"Stages réalisés",st2:"Projets réalisés",st3:"Technologies maîtrisées",st4:"Diplôme d’ingénieur",
 h_about:"À propos",
 about1:"Étudiante en troisième année du cycle ingénieur en Génie Logiciel à l’ENSIAS, je m’intéresse particulièrement à la conception et au développement de solutions logicielles. J’aime analyser des problématiques, relever des défis techniques et transformer des idées en applications concrètes, en accordant une attention particulière à la qualité et à la fiabilité des solutions.",
 about2:"Curieuse, persévérante et toujours désireuse d’apprendre, je recherche un stage PFE à partir de février 2027 pour mettre mes compétences en pratique, contribuer à des projets stimulants et continuer à progresser en ingénierie logicielle.",
@@ -30,7 +30,7 @@ en:{nav_about:"About",nav_edu:"Education",nav_exp:"Experience",nav_proj:"Project
 avail:"Available for an End of Study Internship from January 2027",
 role:"Software Engineering student at ENSIAS",
 lead:"Passionate about software engineering, Full-Stack and Backend development, microservices architectures, and multi-agent systems. I turn ideas into practical applications, from design to implementation.",
-cta_proj:"See my projects",cta_cv:"Download my CV",cta_contact:"Contact me",
+cta_proj:"See my projects",cta_cv:"Download my CV",cta_contact:"Contact me",st1:"Internships completed",st2:"Projects completed",st3:"Technologies mastered",st4:"Engineering degree",
 h_about:"About me",
 about1:"As a third-year Software Engineering student at ENSIAS, I am particularly interested in the design and development of software solutions. I enjoy analyzing problems, tackling technical challenges, and turning ideas into practical applications, with a strong focus on quality and reliability.",
 about2:"Curious, persistent, and always eager to learn, I am seeking a final-year internship starting in February 2027 to apply my skills, contribute to challenging projects, and continue growing in software engineering.",
@@ -69,6 +69,7 @@ const tags=a=>a.map(t=>`<span class="tag">${t}</span>`).join("");
 const L=()=>root.lang;let cur=null;
 document.querySelectorAll("[data-tags]").forEach(e=>e.innerHTML=tags(e.dataset.tags.split(",")));
 $("#skillgrid").innerHTML=Object.keys(SK).map(k=>`<div class="card"><h3 data-i="${k}"></h3><div class="tags">${tags(SK[k].split(", "))}</div></div>`).join("");
+$("#n_proj").textContent=PROJECTS.length;
 function links(p,l){return (p.pdf?`<a class="btn sm" href="${p.pdf}" target="_blank" rel="noopener">${T[l].b_pdf}</a>`:"")+(p.gh?`<a class="btn sm" href="${p.gh}" target="_blank" rel="noopener">${T[l].b_gh}</a>`:"")}
 function renderProjects(){const l=L();
  const card=p=>`<article class="card proj"><h3>${p[l].t}</h3><p class="date">${p[l].d}</p><p style="color:var(--muted);margin-bottom:14px">${p[l].s}</p><div class="tags">${tags(p.tags.split(","))}</div><div class="acts"><button class="btn sm main" data-open="${p.id}">${T[l].b_detail}</button>${links(p,l)}</div></article>`;

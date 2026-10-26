@@ -131,3 +131,11 @@ dialog{margin:auto}
 .lbar{display:flex;gap:5px}
 .lbar i{width:26px;height:6px;border-radius:6px;background:var(--line)}
 .lbar i.on{background:var(--grad)}
+
+/* Chiffres clés */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:8px}
+.card.stat{text-align:center;padding:24px 16px;border-radius:20px;box-shadow:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card.stat:hover{transform:translateY(-3px);border-color:var(--violet);box-shadow:var(--shadow)}
+.stat b{display:block;font:700 2.4rem Sora,sans-serif;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{display:block;margin-top:8px;color:var(--muted);font-size:.92rem}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}}
